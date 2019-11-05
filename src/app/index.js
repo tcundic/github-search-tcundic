@@ -3,11 +3,17 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './index.scss';
+import { Header } from './components/header/header';
 
 class App extends React.Component {
     render() {
         return (
-            <div>Github search</div>
+            <div className="body">
+                <Header />
+                <div className="page-content page-content--full">
+                    Github search
+                </div>
+            </div>
         );
     }
 }

@@ -2,7 +2,7 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './app/index.js',
+    entry: './src/app/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'index.bundle.js'
@@ -23,13 +23,17 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg|json)(\?[a-z0-9=.]+)?$/,
+                loader: 'url-loader?limit=100000'
             }
         ]
     },
     mode: 'development',
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'app/index.html'
+            template: 'src/app/index.html'
         })
     ]
 }

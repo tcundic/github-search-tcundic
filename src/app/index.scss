@@ -1,0 +1,35 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.page-content {
+    flex: 1 0 auto;
+    padding: var(--space) var(--space) 0;
+    width: 100%;
+
+    &::after {
+        flex: 1 0 auto;
+        padding: var(--space) var(--space) 0;
+        width: 100%;
+    }
+}
+
+@media (--break-lg) {
+  .page-content {
+    padding-top: var(--space-lg);
+  }
+
+  .page-content::after {
+    margin-top: var(--space-lg);
+  }
+}
+
+.page-content--full {
+  padding: 0;
+}
+
+.page-content--full::after {
+  content: none;
+}

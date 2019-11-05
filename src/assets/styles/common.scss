@@ -1,0 +1,48 @@
+@import '../../../node_modules/bootstrap/scss/_functions.scss';
+@import '../../../node_modules/bootstrap/scss/_variables.scss';
+@import '../../../node_modules/bootstrap/scss/mixins/_breakpoints.scss';
+
+$background-color-1: #F3F3F3;
+$background-color-2: #F2F2F2;
+$background-color-3: #E9E9E9;
+
+$box-shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+// FONT SIZES
+$font-s-1: .9rem;
+$font-s-2: 1rem;
+
+// HEADER
+$nav-link-color: #3B3B3B;
+$nav-link-border-1: #52B3D9;
+$nav-link-border-2: #AAA9A6;
+$nav-link-border-3: #E4E3E3;
+
+$github-color-1: #8d929a;
+$github-color-2: #737881;
+$github-color-3: #52B3D9;
+$github-color-4: #A8D9EC;
+
+.mt-6 {
+    margin-top: ($spacer * 4) !important;
+}
+
+.mt-7 {
+    margin-top: ($spacer * 5) !important;
+}
+
+.mt-8 {
+    margin-top: ($spacer * 6) !important;
+}
+
+.mt-9 {
+    margin-top: ($spacer * 7) !important;
+}
+
+.mb-6 {
+    margin-bottom: ($spacer * 4) !important;
+}
+
+.bold {
+    font-weight: bold !important;
+}
