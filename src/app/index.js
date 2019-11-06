@@ -3,15 +3,16 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './index.scss';
-import { Header } from './components/header/header';
+import { SearchBar } from './components/search-bar/search-bar';
+import { SearchUsersResults } from './components/search-users-results/search-users-results';
 
 class App extends React.Component {
     render() {
         return (
             <div className="body">
-                <Header />
+                <SearchBar />
                 <div className="page-content page-content--full">
-                    Github search
+                    <SearchUsersResults />
                 </div>
             </div>
         );

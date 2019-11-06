@@ -1,0 +1,35 @@
+@import '../../../assets/styles/common.scss';
+
+header {
+    flex: none;
+}
+
+#github-header {
+
+    & .search-container {
+        display: flex;
+        width: 100%;
+
+        & .logo {
+            margin-right: 30px;
+            border: 4px solid
+            #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            object-fit: cover;
+        }
+
+        & .search-form {
+            flex-grow: 1;
+        }
+
+        & .search-bar {
+            flex-grow: 1;
+        }
+
+        & .search-btn {
+            font-size: 1.7em;
+        }
+    }
+}
