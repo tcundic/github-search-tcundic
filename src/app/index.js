@@ -6,6 +6,7 @@ import { parse } from 'querystring';
 import './index.scss';
 import { SearchBar } from './components/search-bar/search-bar';
 import { SearchUsersResults } from './components/search-users-results/search-users-results';
+import GithubService from './services/github-search-service';
 
 class App extends React.Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class App extends React.Component {
     }
 
     onSearchBtnClick() {
-        console.log('Clicketi');
+        GithubService.findUser(this.state.searchKeyword);
     }
 
     render() {
