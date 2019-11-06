@@ -23,6 +23,10 @@ $github-color-2: #737881;
 $github-color-3: #52B3D9;
 $github-color-4: #A8D9EC;
 
+.interactive {
+    cursor: pointer;
+}
+
 .mt-6 {
     margin-top: ($spacer * 4) !important;
 }
