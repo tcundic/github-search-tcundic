@@ -12,7 +12,8 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchKeyword: ''
+            searchKeyword: '',
+            searchResults: null
         };
 
         this.onSearchKeywordChange = this.onSearchKeywordChange.bind(this);
@@ -24,11 +25,16 @@ class App extends React.Component {
             searchKeyword: e.target.value
         });
 
-        console.log('Tipk tipk');
     }
 
     onSearchBtnClick() {
-        GithubService.findUser(this.state.searchKeyword);
+        GithubService.findUser(this.state.searchKeyword).then(response => {
+            this.setState({
+                searchResults: response.data.items
+            });
+
+            console.log(this.state.searchResults);
+        });
     }
 
     render() {
