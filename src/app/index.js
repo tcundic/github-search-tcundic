@@ -32,6 +32,8 @@ class App extends React.Component {
             this.setState({
                 searchResults: response.data.items
             });
+        }).catch(err => {
+            console.error('Index.js, Error while search users: ', err);
         });
     }
 

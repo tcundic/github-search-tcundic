@@ -8,14 +8,15 @@ export class SearchUsersResults extends React.Component {
 
         if (this.props.searchResults) {
             this.props.searchResults.map((user) => {
-                console.log(user);
                 items.push(<SearchResultsItem key={user.id} user={user} />);
             });
         }
 
         return (
             <div className="page-content container search-results-container">
-                {items}
+                <div className="row">
+                    {items}
+                </div>
             </div>
         )
     }
