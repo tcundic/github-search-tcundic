@@ -8,7 +8,7 @@ export class SearchUsersResults extends React.Component {
 
         if (this.props.searchResults) {
             this.props.searchResults.map((user) => {
-                items.push(<SearchResultsItem key={user.id} user={user} />);
+                items.push(<SearchResultsItem key={user.id} user={user} onClick={(userId) => this.props.onClick(userId)} />);
             });
         }
 

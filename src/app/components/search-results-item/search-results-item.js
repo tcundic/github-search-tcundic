@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import './search-results-item.scss';
 
 export function SearchResultsItem(props) {
@@ -8,7 +10,9 @@ export function SearchResultsItem(props) {
                 <img src={props.user.avatar_url} alt={props.user.login} />
                 <div className="card-body">
                     <h5 className="card-title">{props.user.login}</h5>
-                    <a href="#" className="btn btn-primary visit-profile-btn">View profile</a>
+                    <Link to="/user-profile">
+                        <span onClick={() => props.onClick(props.user.login)} className="btn btn-primary visit-profile-btn">View profile</span>
+                    </Link>
                 </div>
             </div>
         </div>

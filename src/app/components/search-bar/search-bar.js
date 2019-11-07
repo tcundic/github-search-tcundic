@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Logo from '../../../assets/images/logo.png'
 import './search-bar.scss';
@@ -16,7 +17,7 @@ export function SearchBar(props) {
                                 onChange={props.onChange}
                                 onKeyPress={(e) => {
                                     if (e.key === 'Enter') {
-                                        props.onClick();
+                                        /*props.onClick();*/
                                         e.preventDefault();
                                     }
                                 }}
@@ -24,7 +25,9 @@ export function SearchBar(props) {
                                 type="text"
                                 placeholder="Search for Github user"
                                 aria-label="Search for Github user" />
-                            <span className="mdi mdi-magnify search-btn interactive" onClick={props.onClick}></span>
+                            <Link to='/'>
+                                <span className="mdi mdi-magnify search-btn interactive" onClick={props.onClick}></span>
+                            </Link>
                         </form>
                     </div>
                 </div>
