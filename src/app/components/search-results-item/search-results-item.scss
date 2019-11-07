@@ -1,3 +1,21 @@
 .card {
     margin: 10px 0;
+
+    & .card-header {
+        display: flex;
+        width: 200px;
+        height: 200px;
+
+        & img {
+            max-width: 150px;
+            height: auto;
+            margin: auto;
+        }
+    }
+
+    & .card-body {
+        & .visit-profile-btn {
+            margin-top: auto;
+        }
+    }
 }

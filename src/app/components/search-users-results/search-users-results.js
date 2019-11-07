@@ -4,9 +4,18 @@ import { SearchResultsItem } from '../search-results-item/search-results-item';
 
 export class SearchUsersResults extends React.Component {
     render() {
+        let items = [];
+
+        if (this.props.searchResults) {
+            this.props.searchResults.map((user) => {
+                console.log(user);
+                items.push(<SearchResultsItem key={user.id} user={user} />);
+            });
+        }
+
         return (
             <div className="page-content container search-results-container">
-                <SearchResultsItem />
+                {items}
             </div>
         )
     }

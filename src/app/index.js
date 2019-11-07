@@ -32,8 +32,6 @@ class App extends React.Component {
             this.setState({
                 searchResults: response.data.items
             });
-
-            console.log(this.state.searchResults);
         });
     }
 
@@ -44,7 +42,7 @@ class App extends React.Component {
             <div className="body">
                 <SearchBar keyword={this.state.searchKeyword} onChange={(keyword) => this.onSearchKeywordChange(keyword)} onClick={() => this.onSearchBtnClick()}/>
                 <div className="page-content page-content--full">
-                    <SearchUsersResults />
+                    <SearchUsersResults searchResults={this.state.searchResults} />
                 </div>
             </div>
         );
