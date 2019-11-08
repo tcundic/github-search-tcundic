@@ -19,7 +19,7 @@ export class UserProfile extends React.Component {
 
     render() {
         return (
-            <div className="user-profile container mt-5 mb-5">{(() => {
+            <div className="user-profile container mt-4 mb-5">{(() => {
                 if (this.state) {
                     return (
                         <div className="card shadow p-4">
