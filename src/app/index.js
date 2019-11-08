@@ -72,7 +72,7 @@ class App extends React.Component {
                             />
                             <Route
                                 path='/repositories'
-                                render={() => <RepositoriesList />}
+                                render={() => <RepositoriesList userId={this.state.userId}/>}
                             />
                         </Switch>
                     </div>

@@ -41,7 +41,7 @@ export class UserProfile extends React.Component {
                                     <div className="profile-buttons">
                                         <a href={this.state.user.html_url} target="_blank"><span className="btn btn-primary open-github-profile mr-3">Open Github profile</span></a>
                                         <Link to="/repositories">
-                                            <span onClick={() => console.log('clicketi')} className="btn btn-primary open-github-profile">View repositories</span>
+                                            <span onClick={() => console.log('')} className="btn btn-primary open-github-profile">View repositories</span>
                                         </Link>
                                     </div>
                                 </div>
