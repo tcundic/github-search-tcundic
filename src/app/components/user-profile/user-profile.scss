@@ -1,0 +1,40 @@
+.user-profile {
+    & .profile-picture {
+        & img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    & .profile-details {
+        display: flex;
+        flex-direction: column;
+
+        & .user-name {
+            & h1 {
+                margin-bottom: 0;
+            }
+        }
+
+        & .username-email {
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: 24px;
+            color: #666;
+            font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+
+            & small {
+                vertical-align: top;
+            }
+        }
+
+        & .bio {
+            font-weight: 500;
+        }
+
+        & .profile-buttons {
+            margin-top: auto;
+        }
+    }
+}
