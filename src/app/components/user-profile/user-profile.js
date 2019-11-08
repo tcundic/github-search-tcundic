@@ -19,7 +19,7 @@ export class UserProfile extends React.Component {
 
     render() {
         return (
-            <div className="user-profile container mt-5">{(() => {
+            <div className="user-profile container mt-5 mb-5">{(() => {
                 if (this.state) {
                     return (
                         <div className="card shadow p-4">
@@ -43,17 +43,18 @@ export class UserProfile extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="row">
-                                <div className="user-numbers">
-                                    <div className="followers">
-                                        3
-                                    </div>
-                                    <div className="following">
-                                        3
-                                    </div>
-                                    <div className="repositories">
-                                        3
-                                    </div>
+                            <div className="row user-numbers mt-5">
+                                <div className="followers statistic-container mt-4 mb-4 right-vertical-divider">
+                                    <div className="number">{this.state.user.followers}</div>
+                                    <div className="caption">Followers</div>
+                                </div>
+                                <div className="following statistic-container mt-4 mb-4">
+                                    <div className="number">{this.state.user.following}</div>
+                                    <div className="caption">Following</div>
+                                </div>
+                                <div className="repositories statistic-container mt-4 mb-4 left-vertical-divider">
+                                    <div className="number">{this.state.user.public_repos}</div>
+                                    <div className="caption">Repositories</div>
                                 </div>
                             </div>
                         </div>

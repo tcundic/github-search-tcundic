@@ -37,4 +37,38 @@
             margin-top: auto;
         }
     }
+
+    & .user-numbers {
+        display: flex;
+        border-top: 2px solid #888;
+        border-bottom: 2px solid #888;
+        margin-left: 0;
+        margin-right: 0;
+        justify-content: space-around;
+
+        & .statistic-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: bold;
+
+            & .number {
+                font-size: 4em;
+            }
+
+            & .caption {
+                font-size: 1.5em;
+            }
+        }
+
+        &.left-vertical-divider {
+            border-left: 2px solid #888;
+            padding-left: 6em;
+        }
+
+        &.right-vertical-divider {
+            border-right: 2px solid #888;
+            padding-right: 6em;
+        }
+    }
 }
