@@ -7,6 +7,7 @@ import './index.scss';
 import { SearchBar } from './components/search-bar/search-bar';
 import { SearchUsersResults } from './components/search-users-results/search-users-results';
 import { UserProfile } from './components/user-profile/user-profile';
+import { RepositoriesList } from './components/repositories-list/repositories-list';
 import GithubService from './services/github-search-service';
 
 class App extends React.Component {
@@ -68,6 +69,10 @@ class App extends React.Component {
                             <Route
                                 path='/user-profile'
                                 render={() => <UserProfile userId={this.state.userId}/>}
+                            />
+                            <Route
+                                path='/repositories'
+                                render={() => <RepositoriesList />}
                             />
                         </Switch>
                     </div>
