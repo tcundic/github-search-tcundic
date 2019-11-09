@@ -4,6 +4,9 @@ import Loader from 'react-loader-spinner';
 
 import './loading-spinner.scss';
 
+/**
+ * Component which show animation during async network request loading.
+ */
 export const Spinner = props => {
     const { promiseInProgress } = usePromiseTracker();
 

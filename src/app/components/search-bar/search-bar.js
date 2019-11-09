@@ -17,7 +17,6 @@ export function SearchBar(props) {
                                 onChange={props.onChange}
                                 onKeyPress={(e) => {
                                     if (e.key === 'Enter') {
-                                        /*props.onClick();*/
                                         e.preventDefault();
                                     }
                                 }}

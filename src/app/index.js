@@ -29,6 +29,11 @@ class App extends React.Component {
         this.onRepositoriesPageVisit = this.onRepositoriesPageVisit.bind(this);
     }
 
+    /**
+     * This method is called when user type into search bar.
+     * 
+     * @param {click event} e 
+     */
     onSearchKeywordChange(e) {
         this.setState({
             searchKeyword: e.target.value
@@ -36,18 +41,26 @@ class App extends React.Component {
 
     }
 
+    /**
+     * This method is called when user click search button.
+     * It looks for cached results, and in case if doesn't have them cached,
+     * call service for retrieving search results.
+     */
     onSearchBtnClick() {
         const cachedQuery = localStorage.getItem(this.state.searchKeyword);
         this.setState({
             searchResults: null
         });
 
+        // Check if there is already same query cached...
         if (cachedQuery) {
             this.setState({
                 searchResults: JSON.parse(cachedQuery),
                 searchKeyword: ''
             });
         } else {
+            // ...no cache, then make GET request, and in meantime show loading animation.
+            // After getting results store data to local cache.
             trackPromise(
                 GithubService.findUser(this.state.searchKeyword).then(response => {
                     localStorage.setItem(this.state.searchKeyword, JSON.stringify(response.data.items));
@@ -63,6 +76,12 @@ class App extends React.Component {
         }
     }
 
+    /**
+     * This method is called when user click on "View profile" button on search results page.
+     * It retrieve complete data about user, from local cache or by GET request to Github API.
+     * 
+     * @param {user name of user} userId 
+     */
     onProfileVisit(userId) {
         const cachedUser = localStorage.getItem(`user.${userId}`);
         this.setState({
@@ -88,6 +107,11 @@ class App extends React.Component {
         }
     }
 
+    /**
+     * This method is called when user view repositories page, from user profile page.
+     * We don't need here any function parameter, because we have user id saved in App component state.
+     * It retrieve list of all repositories from user.
+     */
     onRepositoriesPageVisit() {
         const cachedRepositories = localStorage.getItem(`${this.state.user.login}.repositories`);
         this.setState({

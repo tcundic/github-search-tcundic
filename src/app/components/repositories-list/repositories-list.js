@@ -4,6 +4,11 @@ import { MDBDataTable } from 'mdbreact'
 import './repositories-list.scss';
 
 export class RepositoriesList extends React.Component {
+    /**
+     * This method convert string date to Date object and format it.
+     * 
+     * @param {string} date Date when repository is created
+     */
     formatDate(date) {
         let d = new Date(date);
 
