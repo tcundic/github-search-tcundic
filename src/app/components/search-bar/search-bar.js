@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Logo from '../../../assets/images/logo.png'
+import Logo from '../../../assets/images/logo.ico'
 import './search-bar.scss';
 
 export function SearchBar(props) {

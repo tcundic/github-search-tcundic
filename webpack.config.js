@@ -25,7 +25,7 @@ module.exports = {
                 use: ['style-loader', 'css-loader']
             },
             {
-                test: /\.(jpe?g|png|gif|svg|json)(\?[a-z0-9=.]+)?$/,
+                test: /\.(jpe?g|png|gif|svg|json|ico)(\?[a-z0-9=.]+)?$/,
                 loader: 'url-loader?limit=100000'
             }
         ]
@@ -36,7 +36,8 @@ module.exports = {
     mode: 'development',
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'src/app/index.html'
+            template: 'src/app/index.html',
+            favicon: 'src/assets/images/logo.ico'
         })
     ]
 }
