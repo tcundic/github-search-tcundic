@@ -61,18 +61,27 @@ class App extends React.Component {
         } else {
             // ...no cache, then make GET request, and in meantime show loading animation.
             // After getting results store data to local cache.
-            trackPromise(
-                GithubService.findUser(this.state.searchKeyword).then(response => {
-                    localStorage.setItem(this.state.searchKeyword, JSON.stringify(response.data.items));
+            let searchResultsPromise = GithubService.findUser(this.state.searchKeyword);
 
+            trackPromise(
+                searchResultsPromise.then(response => {
                     this.setState({
                         searchResults: response.data.items,
-                        searchKeyword: ''
                     });
                 }).catch(err => {
                     console.error('Index.js, Error while searching users: ', err);
                 })
             );
+
+            searchResultsPromise.then(response => {
+                localStorage.setItem(this.state.searchKeyword, JSON.stringify(response.data.items));
+
+                this.setState({
+                    searchKeyword: ''
+                });
+            }).catch(err => {
+                console.warn('Index.js, Error while saving search results to local storage: ', err);
+            });
         }
     }
 
@@ -93,10 +102,10 @@ class App extends React.Component {
                 user: JSON.parse(cachedUser)
             });
         } else {
-            trackPromise(
-                GithubService.getUser(userId).then(response => {
-                    localStorage.setItem(`user.${userId}`, JSON.stringify(response.data));
+            let userPromise = GithubService.getUser(userId);
 
+            trackPromise(
+                userPromise.then(response => {
                     this.setState({
                         user: response.data
                     });
@@ -104,6 +113,12 @@ class App extends React.Component {
                     console.error('Index.js, Error while getting user data: ', err);
                 })
             );
+
+            userPromise.then(response => {
+                localStorage.setItem(`user.${userId}`, JSON.stringify(response.data));
+            }).catch(err => {
+                console.warn('Index.js, Error while saving user data to local storage: ', err);
+            });
         }
     }
 
@@ -123,10 +138,10 @@ class App extends React.Component {
                 repositories: JSON.parse(cachedRepositories)
             });
         } else {
-            trackPromise(
-                GithubService.getUserRepositories(this.state.user.login).then(response => {
-                    localStorage.setItem(`${this.state.user.login}.repositories`, JSON.stringify(response));
+            let repositoriesPromise = GithubService.getUserRepositories(this.state.user.login);
 
+            trackPromise(
+                repositoriesPromise.then(response => {
                     this.setState({
                         repositories: response
                     });
@@ -134,6 +149,12 @@ class App extends React.Component {
                     console.error('Index.js, Error while getting user repositories: ', err);
                 })
             );
+
+            repositoriesPromise.then(response => {
+                localStorage.setItem(`${this.state.user.login}.repositories`, JSON.stringify(response));
+            }).catch(err => {
+                console.warn('Index.js, Error while saving repositories data to local storage: ', err);
+            });
         }
     }
 
