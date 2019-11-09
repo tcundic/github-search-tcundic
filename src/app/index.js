@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { trackPromise } from 'react-promise-tracker';
 
 import './index.scss';
+import { Spinner } from './components/loading-spinner/loading-spinner';
 import { SearchBar } from './components/search-bar/search-bar';
 import { SearchUsersResults } from './components/search-users-results/search-users-results';
 import { UserProfile } from './components/user-profile/user-profile';
@@ -39,14 +41,16 @@ class App extends React.Component {
             searchResults: null
         });
 
-        GithubService.findUser(this.state.searchKeyword).then(response => {
-            this.setState({
-                searchResults: response.data.items,
-                searchKeyword: ''
-            });
-        }).catch(err => {
-            console.error('Index.js, Error while searching users: ', err);
-        });
+        trackPromise(
+            GithubService.findUser(this.state.searchKeyword).then(response => {
+                this.setState({
+                    searchResults: response.data.items,
+                    searchKeyword: ''
+                });
+            }).catch(err => {
+                console.error('Index.js, Error while searching users: ', err);
+            })
+        );
     }
 
     onProfileVisit(userId) {
@@ -54,13 +58,15 @@ class App extends React.Component {
             user: null
         });
 
-        GithubService.getUser(userId).then(response => {
-            this.setState({
-                user: response.data
-            });
-        }).catch(err => {
-            console.error('Index.js, Error while getting user data: ', err);
-        });
+        trackPromise(
+            GithubService.getUser(userId).then(response => {
+                this.setState({
+                    user: response.data
+                });
+            }).catch(err => {
+                console.error('Index.js, Error while getting user data: ', err);
+            })
+        );
     }
 
     onRepositoriesPageVisit() {
@@ -68,13 +74,15 @@ class App extends React.Component {
             repositories: []
         });
 
-        GithubService.getUserRepositories(this.state.user.login).then(response => {
-            this.setState({
-                repositories: response
-            });
-        }).catch(err => {
-            console.error('Index.js, Error while getting user repositories: ', err);
-        });
+        trackPromise(
+            GithubService.getUserRepositories(this.state.user.login).then(response => {
+                this.setState({
+                    repositories: response
+                });
+            }).catch(err => {
+                console.error('Index.js, Error while getting user repositories: ', err);
+            })
+        );
     }
 
     render() {
@@ -107,4 +115,8 @@ class App extends React.Component {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <div>
+        <App />
+        <Spinner />
+    </div>, document.getElementById('root'));
