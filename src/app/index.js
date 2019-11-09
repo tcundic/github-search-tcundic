@@ -37,52 +37,80 @@ class App extends React.Component {
     }
 
     onSearchBtnClick() {
+        const cachedQuery = localStorage.getItem(this.state.searchKeyword);
         this.setState({
             searchResults: null
         });
 
-        trackPromise(
-            GithubService.findUser(this.state.searchKeyword).then(response => {
-                this.setState({
-                    searchResults: response.data.items,
-                    searchKeyword: ''
-                });
-            }).catch(err => {
-                console.error('Index.js, Error while searching users: ', err);
-            })
-        );
+        if (cachedQuery) {
+            this.setState({
+                searchResults: JSON.parse(cachedQuery),
+                searchKeyword: ''
+            });
+        } else {
+            trackPromise(
+                GithubService.findUser(this.state.searchKeyword).then(response => {
+                    localStorage.setItem(this.state.searchKeyword, JSON.stringify(response.data.items));
+
+                    this.setState({
+                        searchResults: response.data.items,
+                        searchKeyword: ''
+                    });
+                }).catch(err => {
+                    console.error('Index.js, Error while searching users: ', err);
+                })
+            );
+        }
     }
 
     onProfileVisit(userId) {
+        const cachedUser = localStorage.getItem(`user.${userId}`);
         this.setState({
             user: null
         });
 
-        trackPromise(
-            GithubService.getUser(userId).then(response => {
-                this.setState({
-                    user: response.data
-                });
-            }).catch(err => {
-                console.error('Index.js, Error while getting user data: ', err);
-            })
-        );
+        if (cachedUser) {
+            this.setState({
+                user: JSON.parse(cachedUser)
+            });
+        } else {
+            trackPromise(
+                GithubService.getUser(userId).then(response => {
+                    localStorage.setItem(`user.${userId}`, JSON.stringify(response.data));
+
+                    this.setState({
+                        user: response.data
+                    });
+                }).catch(err => {
+                    console.error('Index.js, Error while getting user data: ', err);
+                })
+            );
+        }
     }
 
     onRepositoriesPageVisit() {
+        const cachedRepositories = localStorage.getItem(`${this.state.user.login}.repositories`);
         this.setState({
             repositories: []
         });
 
-        trackPromise(
-            GithubService.getUserRepositories(this.state.user.login).then(response => {
-                this.setState({
-                    repositories: response
-                });
-            }).catch(err => {
-                console.error('Index.js, Error while getting user repositories: ', err);
-            })
-        );
+        if (cachedRepositories) {
+            this.setState({
+                repositories: JSON.parse(cachedRepositories)
+            });
+        } else {
+            trackPromise(
+                GithubService.getUserRepositories(this.state.user.login).then(response => {
+                    localStorage.setItem(`${this.state.user.login}.repositories`, JSON.stringify(response));
+
+                    this.setState({
+                        repositories: response
+                    });
+                }).catch(err => {
+                    console.error('Index.js, Error while getting user repositories: ', err);
+                })
+            );
+        }
     }
 
     render() {

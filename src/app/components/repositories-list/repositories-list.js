@@ -4,6 +4,16 @@ import { MDBDataTable } from 'mdbreact'
 import './repositories-list.scss';
 
 export class RepositoriesList extends React.Component {
+    formatDate(date) {
+        let d = new Date(date);
+
+        let day = d.getDate();
+        let month = d.getMonth() + 1;
+        let year = d.getFullYear();
+
+        return `${day}/${month}/${year}`;
+    }
+
     render() {
         let items = [];
 
@@ -25,9 +35,12 @@ export class RepositoriesList extends React.Component {
                     sort: 'asc',
                 },
                 {
+                    label: 'Created on',
+                    field: 'created_at',
+                },
+                {
                     label: 'View repository',
                     field: 'html_url',
-                    sort: 'asc',
                 }
             ],
             rows: []
@@ -40,6 +53,7 @@ export class RepositoriesList extends React.Component {
                         name: repo.full_name,
                         description: repo.description !== null ? repo.description : <em>No description</em>,
                         language: repo.language !== null ? repo.language : <em>No language specified</em>,
+                        created_at: this.formatDate(repo.created_at),
                         html_url: <a href={repo.html_url} target="_blank"><span className="btn btn-primary open-repository-btn">Open repository</span></a>
                     }
                 );
