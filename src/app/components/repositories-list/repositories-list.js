@@ -70,7 +70,7 @@ export class RepositoriesList extends React.Component {
 
         return (
             <div className="repositories-table-container container mt-4 mb-5">
-                <h1>{`${!!(this.props.user) ? this.props.user.name + ' repositories' : ''}`}</h1>
+                <h1 className="user-name">{`${!!(this.props.user) ? this.props.user.name + ' repositories' : ''}`}</h1>
                 <MDBDataTable
                     striped
                     bordered

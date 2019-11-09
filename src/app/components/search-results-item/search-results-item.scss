@@ -1,9 +1,27 @@
+@import '../../../assets/styles/common.scss';
+
 .card {
     border-radius: 2px;
     margin: 10px 0;
+    background-color: $background-color-2;
 
     & img {
         width: 100%;
         height: auto;
+    }
+
+    & .card-title {
+        color: $github-color-1;
+    }
+
+    & .visit-profile-btn {
+        background-color: inherit;
+        border-color: $github-color-1;
+
+        &.btn.btn-primary {
+            &:active {
+                background-color: $github-color-2;
+            }
+        }
     }
 }

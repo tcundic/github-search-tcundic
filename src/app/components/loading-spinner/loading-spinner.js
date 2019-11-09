@@ -13,7 +13,7 @@ export const Spinner = props => {
     return (
         promiseInProgress && (
             <div className="spinner">
-                <Loader type="TailSpin" color="#2BAD60" height={100} width={100} />
+                <Loader type="TailSpin" color="#66fcf1" height={100} width={100} />
             </div>
         )
     );

@@ -19,7 +19,7 @@ const GithubService = {
      */
     findUser: async function(keyword) {
         try {
-            const data = await axios.get(`${GITHUB_API}/${SEARCH_USERS_API}${keyword}`);
+            const data = await axios.get(`${GITHUB_API}/${SEARCH_USERS_API}${keyword}&per_page=32`);
             return data;
         } catch(error) {
             console.error('Error while fetching users: ', error);

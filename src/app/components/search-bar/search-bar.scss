@@ -5,6 +5,7 @@ header {
 }
 
 #github-header {
+    background-color: $background-color-2;
 
     & .search-container {
         display: flex;
@@ -30,6 +31,7 @@ header {
 
         & .search-btn {
             font-size: 1.7em;
+            color: $github-color-1;
         }
     }
 }
