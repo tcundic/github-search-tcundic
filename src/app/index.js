@@ -17,11 +17,14 @@ class App extends React.Component {
         this.state = {
             searchKeyword: '',
             searchResults: null,
-            userId: null
+            user: null,
+            repositories: null,
         };
 
         this.onSearchKeywordChange = this.onSearchKeywordChange.bind(this);
         this.onSearchBtnClick = this.onSearchBtnClick.bind(this);
+        this.onProfileVisit = this.onProfileVisit.bind(this);
+        this.onRepositoriesPageVisit = this.onRepositoriesPageVisit.bind(this);
     }
 
     onSearchKeywordChange(e) {
@@ -42,13 +45,35 @@ class App extends React.Component {
                 searchKeyword: ''
             });
         }).catch(err => {
-            console.error('Index.js, Error while search users: ', err);
+            console.error('Index.js, Error while searching users: ', err);
         });
     }
 
     onProfileVisit(userId) {
         this.setState({
-            userId: userId
+            user: null
+        });
+
+        GithubService.getUser(userId).then(response => {
+            this.setState({
+                user: response.data
+            });
+        }).catch(err => {
+            console.error('Index.js, Error while getting user data: ', err);
+        });
+    }
+
+    onRepositoriesPageVisit() {
+        this.setState({
+            repositories: []
+        });
+
+        GithubService.getUserRepositories(this.state.user.login).then(response => {
+            this.setState({
+                repositories: response
+            });
+        }).catch(err => {
+            console.error('Index.js, Error while getting user repositories: ', err);
         });
     }
 
@@ -68,11 +93,11 @@ class App extends React.Component {
                             />
                             <Route
                                 path='/user-profile'
-                                render={() => <UserProfile userId={this.state.userId}/>}
+                                render={() => <UserProfile user={this.state.user} onClick={() => this.onRepositoriesPageVisit()}/>}
                             />
                             <Route
                                 path='/repositories'
-                                render={() => <RepositoriesList userId={this.state.userId}/>}
+                                render={() => <RepositoriesList user={this.state.user} repositories={this.state.repositories}/>}
                             />
                         </Switch>
                     </div>

@@ -1,28 +1,61 @@
 import React from 'react';
+import { MDBDataTable } from 'mdbreact'
 
-import GithubService from '../../services/github-search-service';
 import './repositories-list.scss';
 
 export class RepositoriesList extends React.Component {
-    constructor(props) {
-        super(props);
-
-        if (this.props.userId != null) {
-            GithubService.getUserRepositories(this.props.userId).then(response => {
-                console.log(response);
-                this.setState({
-                    repositories: response.data
-                });
-            }).catch(err => {
-                console.error('Index.js, Error while search users: ', err);
-            });
-        }
-    }
-
     render() {
+        let items = [];
+
+        const data = {
+            columns: [
+                {
+                    label: 'Name',
+                    field: 'name',
+                    sort: 'asc',
+                },
+                {
+                    label: 'Description',
+                    field: 'description',
+                    sort: 'asc',
+                },
+                {
+                    label: 'Language',
+                    field: 'language',
+                    sort: 'asc',
+                },
+                {
+                    label: 'View repository',
+                    field: 'html_url',
+                    sort: 'asc',
+                }
+            ],
+            rows: []
+        };
+
+        if (this.props.repositories) {
+            this.props.repositories.map((repo) => {
+                items.push(
+                    {
+                        name: repo.full_name,
+                        description: repo.description !== null ? repo.description : <em>No description</em>,
+                        language: repo.language !== null ? repo.language : <em>No language specified</em>,
+                        html_url: <a href={repo.html_url} target="_blank"><span className="btn btn-primary open-repository-btn">Open repository</span></a>
+                    }
+                );
+            });
+
+            data.rows = items;
+
+        }
+
         return (
-            <div className="">
-                repositories list
+            <div className="repositories-table-container container mt-4 mb-5">
+                <h1>{`${!!(this.props.user) ? this.props.user.name + ' repositories' : ''}`}</h1>
+                <MDBDataTable
+                    striped
+                    bordered
+                    data={data} />
             </div>
         )
     }
