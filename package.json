@@ -10,8 +10,9 @@
     ]
   },
   "scripts": {
-    "create": "webpack",
     "start": "webpack-dev-server --open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/tcundic/github-search-tcundic/issues"
   },
-  "homepage": "https://github.com/tcundic/github-search-tcundic#readme",
+  "homepage": "https://tcundic.github.io/github-search-tcundic",
   "dependencies": {
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
@@ -46,6 +47,7 @@
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
+    "gh-pages": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.0",
