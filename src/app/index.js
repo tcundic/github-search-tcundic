@@ -94,7 +94,8 @@ class App extends React.Component {
     onProfileVisit(userId) {
         const cachedUser = localStorage.getItem(`user.${userId}`);
         this.setState({
-            user: null
+            user: null,
+            searchResults: null
         });
 
         if (cachedUser) {
