@@ -1,5 +1,6 @@
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/app/index.js',
@@ -38,6 +39,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'src/app/index.html',
             favicon: 'src/assets/images/logo.ico'
-        })
+        }),
+        new CleanWebpackPlugin(),
     ]
 }
