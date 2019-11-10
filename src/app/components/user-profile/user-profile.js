@@ -34,7 +34,7 @@ export class UserProfile extends React.Component {
                                 </div>
                             </div>
                             <div className="row user-numbers mt-5">
-                                <div className="followers statistic-container mt-4 mb-4 right-vertical-divider">
+                                <div className="followers statistic-container mt-4 bold mb-4 right-vertical-divider">
                                     <div className="number">{this.props.user.followers}</div>
                                     <div className="caption">Followers</div>
                                 </div>
@@ -42,7 +42,7 @@ export class UserProfile extends React.Component {
                                     <div className="number">{this.props.user.following}</div>
                                     <div className="caption">Following</div>
                                 </div>
-                                <div className="repositories statistic-container mt-4 mb-4 left-vertical-divider">
+                                <div className="repositories statistic-container bold mt-4 mb-4 left-vertical-divider">
                                     <div className="number">{this.props.user.public_repos}</div>
                                     <div className="caption">Repositories</div>
                                 </div>

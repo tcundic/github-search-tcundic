@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import Logo from '../../../assets/images/logo.ico'
 import './search-bar.scss';
 
 export function SearchBar(props) {
+    let searchBtn = React.createRef();
+
     return (
         <header>
             <nav id="github-header" className="navbar navbar-expand-lg navbar-light">
@@ -20,6 +22,7 @@ export function SearchBar(props) {
                                 onKeyPress={(e) => {
                                     if (e.key === 'Enter') {
                                         e.preventDefault();
+                                        searchBtn.current.click();
                                     }
                                 }}
                                 className="form-control form-control-sm mr-3 search-bar"
@@ -27,7 +30,7 @@ export function SearchBar(props) {
                                 placeholder="Search for Github user"
                                 aria-label="Search for Github user" />
                             <Link to='/'>
-                                <span className="mdi mdi-magnify search-btn interactive" onClick={props.onClick}></span>
+                                <span className="mdi mdi-magnify search-btn interactive" ref={searchBtn} onClick={props.onClick}></span>
                             </Link>
                         </form>
                     </div>
