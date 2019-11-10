@@ -38,7 +38,7 @@ export class UserProfile extends React.Component {
                                     <div className="number">{this.props.user.followers}</div>
                                     <div className="caption">Followers</div>
                                 </div>
-                                <div className="following statistic-container mt-4 mb-4">
+                                <div className="following statistic-container bold mt-4 mb-4">
                                     <div className="number">{this.props.user.following}</div>
                                     <div className="caption">Following</div>
                                 </div>

@@ -1,3 +1,9 @@
+@import '../../../assets/styles/common.scss';
+
 .search-results-container {
     margin-top: 20px;
+
+    & .no-results {
+        color: $github-color-white;
+    }
 }

@@ -10,7 +10,9 @@ export function SearchBar(props) {
             <nav id="github-header" className="navbar navbar-expand-lg navbar-light">
                 <div className="container">
                     <div className="search-container">
-                        <img className="padding-1-l logo" src={Logo} width="40" height="40" />
+                        <Link to='/'>
+                            <img className="padding-1-l logo interactive" src={Logo} width="40" height="40" />
+                        </Link>
                         <form className="search-form form-inline">
                             <input
                                 value={props.keyword}

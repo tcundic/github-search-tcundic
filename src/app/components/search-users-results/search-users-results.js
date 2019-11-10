@@ -10,6 +10,10 @@ export class SearchUsersResults extends React.Component {
             this.props.searchResults.map((user) => {
                 items.push(<SearchResultsItem key={user.id} user={user} onClick={(userId) => this.props.onClick(userId)} />);
             });
+
+            if (this.props.searchResults.length == 0) {
+                items.push(<em className="no-results" key="0">No results</em>);
+            }
         }
 
         return (
