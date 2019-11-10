@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import Logo from '../../../assets/images/logo.ico'
 import './search-bar.scss';
 
-export function SearchBar(props) {
+export const SearchBar = ({keyword, onChange, onClick}) => {
     let searchBtn = React.createRef();
 
     return (
@@ -17,8 +17,8 @@ export function SearchBar(props) {
                         </Link>
                         <form className="search-form form-inline">
                             <input
-                                value={props.keyword}
-                                onChange={props.onChange}
+                                value={keyword}
+                                onChange={onChange}
                                 onKeyPress={(e) => {
                                     if (e.key === 'Enter') {
                                         e.preventDefault();
@@ -30,7 +30,7 @@ export function SearchBar(props) {
                                 placeholder="Search for Github user"
                                 aria-label="Search for Github user" />
                             <Link to='/'>
-                                <span className="mdi mdi-magnify search-btn interactive" ref={searchBtn} onClick={props.onClick}></span>
+                                <span className="mdi mdi-magnify search-btn interactive" ref={searchBtn} onClick={onClick}></span>
                             </Link>
                         </form>
                     </div>

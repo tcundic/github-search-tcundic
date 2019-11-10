@@ -7,7 +7,7 @@ import './loading-spinner.scss';
 /**
  * Component which show animation during async network request loading.
  */
-export const Spinner = props => {
+export const Spinner = () => {
     const { promiseInProgress } = usePromiseTracker();
 
     return (

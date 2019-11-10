@@ -13,28 +13,19 @@ import { RepositoriesList } from './components/repositories-list/repositories-li
 import GithubService from './services/github-search-service';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            searchKeyword: '',
-            searchResults: null,
-            user: null,
-            repositories: null,
-        };
-
-        this.onSearchKeywordChange = this.onSearchKeywordChange.bind(this);
-        this.onSearchBtnClick = this.onSearchBtnClick.bind(this);
-        this.onProfileVisit = this.onProfileVisit.bind(this);
-        this.onRepositoriesPageVisit = this.onRepositoriesPageVisit.bind(this);
-    }
+    state = {
+        searchKeyword: '',
+        searchResults: null,
+        user: null,
+        repositories: null,
+    };
 
     /**
      * This method is called when user type into search bar.
      * 
      * @param {click event} e 
      */
-    onSearchKeywordChange(e) {
+    onSearchKeywordChange = (e) => {
         this.setState({
             searchKeyword: e.target.value
         });
@@ -46,7 +37,7 @@ class App extends React.Component {
      * It looks for cached results, and in case if doesn't have them cached,
      * call service for retrieving search results.
      */
-    onSearchBtnClick() {
+    onSearchBtnClick = () => {
         const cachedQuery = localStorage.getItem(this.state.searchKeyword);
         this.setState({
             searchResults: null
@@ -91,7 +82,7 @@ class App extends React.Component {
      * 
      * @param {user name of user} userId 
      */
-    onProfileVisit(userId) {
+    onProfileVisit = (userId) => {
         const cachedUser = localStorage.getItem(`user.${userId}`);
         this.setState({
             user: null,
@@ -128,7 +119,7 @@ class App extends React.Component {
      * We don't need here any function parameter, because we have user id saved in App component state.
      * It retrieve list of all repositories from user.
      */
-    onRepositoriesPageVisit() {
+    onRepositoriesPageVisit = () => {
         const cachedRepositories = localStorage.getItem(`${this.state.user.login}.repositories`);
         this.setState({
             repositories: []

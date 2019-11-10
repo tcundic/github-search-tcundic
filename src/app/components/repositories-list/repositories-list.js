@@ -4,26 +4,7 @@ import { MDBDataTable } from 'mdbreact'
 import './repositories-list.scss';
 
 export class RepositoriesList extends React.Component {
-    /**
-     * This method convert string date to Date object and format it.
-     * 
-     * @param {string} date Date when repository is created
-     */
-    formatDate(date) {
-        let d = new Date(date);
-
-        let day = d.getDate();
-        let month = d.getMonth() + 1;
-        let year = d.getFullYear();
-
-        return `${day}/${month}/${year}`;
-    }
-
-    render() {
-        let items = [];
-
-        const data = {
-            columns: [
+    columns = [
                 {
                     label: 'Name',
                     field: 'name',
@@ -47,12 +28,35 @@ export class RepositoriesList extends React.Component {
                     label: 'View repository',
                     field: 'html_url',
                 }
-            ],
+            ];
+
+    /**
+     * This method convert string date to Date object and format it.
+     * 
+     * @param {string} date Date when repository is created
+     */
+    formatDate(date) {
+        let d = new Date(date);
+
+        let day = d.getDate();
+        let month = d.getMonth() + 1;
+        let year = d.getFullYear();
+
+        return `${day}/${month}/${year}`;
+    }
+
+    render() {
+        const { user, repositories } = this.props;
+
+        let items = [];
+
+        const data = {
+            columns: this.columns,
             rows: []
         };
 
-        if (this.props.repositories) {
-            this.props.repositories.map((repo) => {
+        if (repositories) {
+            repositories.map((repo) => {
                 items.push(
                     {
                         name: repo.full_name,
@@ -70,7 +74,7 @@ export class RepositoriesList extends React.Component {
 
         return (
             <div className="repositories-table-container container mt-4 mb-5">
-                <h1 className="user-name">{`${!!(this.props.user) ? this.props.user.name + ' repositories' : ''}`}</h1>
+                <h1 className="user-name">{`${!!(user) ? user.name + ' repositories' : ''}`}</h1>
                 <MDBDataTable
                     striped
                     bordered
