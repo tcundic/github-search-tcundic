@@ -1,7 +1,7 @@
 ## Github search application
 
 With this React application you can search for Github users, and view information about user profile and respositories. It communicates with Github API. While developing this application I tried to keep in mind good programming principles like DRY, Single Responsibility principle etc. 
-For design I used Bootstrap library, and for loading animation I used React Promise Tracker and loading spinner example I found online.
+For design I used Bootstrap library, for loading animation I used React Promise Tracker and loading spinner example I found online, and also I used Redux library for state managing.
 
 ### Installing
 
