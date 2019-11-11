@@ -15,14 +15,30 @@ export const findUser = (searchResults) => {
 };
 
 export const findGithubUser = keyword => {
+    const cachedQuery = localStorage.getItem(keyword);
+
     return (dispatch) => {
-        return axios.get(`${SEARCH_USERS_API}?q=${keyword}&per_page=32`)
-            .then(response => {
-                dispatch(findUser(response.data.items))
+        if (cachedQuery) {
+            return new Promise((resolve, reject) => {
+                dispatch(findUser(JSON.parse(cachedQuery)));
+                resolve(JSON.parse(cachedQuery));
+            });
+        } else {
+            let searchResultsPromise = axios.get(`${SEARCH_USERS_API}?q=${keyword}&per_page=32`);
+
+            searchResultsPromise.then(response => {
+                localStorage.setItem(keyword, JSON.stringify(response.data.items));
+            }).catch(err => {
+                console.warn('Error while saving search results to local storage: ', err);
+            });
+
+            return searchResultsPromise.then(response => {
+                dispatch(findUser(response.data.items));
             })
             .catch(err => {
                 console.err('Error while search for user: ', err);
             });
+        }
     };
 };
 
@@ -34,14 +50,30 @@ export const getUser = (user) => {
 };
 
 export const getGithubUser = userId => {
+    const cachedUser = localStorage.getItem(`user.${userId}`);
+
     return (dispatch) => {
-        return axios.get(`${SINGLE_USER_API}/${userId}`)
-            .then(response => {
+        if (cachedUser) {
+            return new Promise((resolve, reject) => {
+                dispatch(getUser(JSON.parse(cachedUser)));
+                resolve(JSON.parse(cachedUser));
+            });
+        } else {
+            let userPromise = axios.get(`${SINGLE_USER_API}/${userId}`);
+
+            userPromise.then(response => {
+                localStorage.setItem(`user.${userId}`, JSON.stringify(response.data));
+            }).catch(err => {
+                console.warn('Error while saving user data to local storage: ', err);
+            });
+
+            return userPromise.then(response => {
                 dispatch(getUser(response.data))
             })
             .catch(err => {
                 console.error('Error while fetching user: ', err);
             });
+        }
     };
 };
 
@@ -53,14 +85,30 @@ export const getRepositories = (repositories) => {
 };
 
 export const getUserRepositories = userId => {
+    const cachedRepositories = localStorage.getItem(`${userId}.repositories`);
+
     return (dispatch) => {
-        return getRepositoriesNextPage(userId, 1, [])
-            .then(response => {
+        if (cachedRepositories) {
+            return new Promise((resolve, reject) => {
+                dispatch(getRepositories(JSON.parse(cachedRepositories)));
+                resolve(JSON.parse(cachedRepositories));
+            });
+        } else {
+            let repositoriesPromise = getRepositoriesNextPage(userId, 1, []);
+
+            repositoriesPromise.then(response => {
+                localStorage.setItem(`${userId}.repositories`, JSON.stringify(response));
+            }).catch(err => {
+                console.warn('Error while saving repositories data to local storage: ', err);
+            });
+
+            return repositoriesPromise.then(response => {
                 dispatch(getRepositories(response))
             })
             .catch(err => {
                 console.error('Error while fetching repositories: ', err);
             });
+        }
     };
 };
 
