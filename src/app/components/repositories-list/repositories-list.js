@@ -47,7 +47,6 @@ class RepositoriesList extends React.Component {
     }
 
     render() {
-
         const { user, repositories } = this.props;
 
         let items = [];
@@ -76,7 +75,7 @@ class RepositoriesList extends React.Component {
 
         return (
             <div className="repositories-table-container container mt-4 mb-5">
-                <h1 className="user-name">{`${!!(user) ? user.name + ' repositories' : ''}`}</h1>
+                <h1 className="user-name">{`${!!(user && user.name) ? user.name + ' repositories' : ''}`}</h1>
                 <MDBDataTable
                     striped
                     bordered
@@ -88,6 +87,7 @@ class RepositoriesList extends React.Component {
 
 const mapStateToProps = state => {
     return {
+        user: state.user,
         repositories: state.repositories
     };
 };

@@ -65,6 +65,7 @@ class App extends React.Component {
             <BrowserRouter>
                 <div className="body">
                     <SearchBar keyword={this.state.searchKeyword} onChange={(keyword) => this.onSearchKeywordChange(keyword)} onClick={() => this.onSearchBtnClick()}/>
+                    <Spinner />
                     <div className="page-content page-content--full">
                         <Switch>
                             <Route
@@ -92,6 +93,5 @@ ReactDOM.render(
     <div>
         <Provider store={store}>
             <App />
-            <Spinner />
         </Provider>
     </div>, document.getElementById('root'));
