@@ -1,13 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import './search-users-results.scss';
 import { SearchResultsItem } from '../search-results-item/search-results-item';
 
-export const SearchUsersResults = ({searchResults, onClick}) => {
+const SearchUsersResults = ({searchResults, onClick}) => {
     let items = [];
 
     if (searchResults) {
         searchResults.map((user) => {
-            items.push(<SearchResultsItem key={user.id} user={user} onClick={(userId) => onClick(userId)} />);
+            items.push(<SearchResultsItem key={user.id} user={user} onClick={userId => onClick(userId)} />);
         });
 
         if (searchResults.length == 0) {
@@ -21,5 +23,13 @@ export const SearchUsersResults = ({searchResults, onClick}) => {
                 {items}
             </div>
         </div>
-    )
+    );
 }
+
+const mapStateToProps = state => {
+    return {
+        searchResults: state.searchResults
+    };
+};
+
+export default connect(mapStateToProps)(SearchUsersResults);

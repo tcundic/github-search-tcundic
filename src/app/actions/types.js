@@ -1,0 +1,3 @@
+export const SEARCH_USERS = 'SEARCH_USERS';
+export const FETCH_USER = 'FETCH_USER';
+export const FETCH_REPOSITORIES = 'FETCH_REPOSITORIES';

@@ -1,9 +1,10 @@
 import React from 'react';
 import { MDBDataTable } from 'mdbreact'
+import { connect } from 'react-redux';
 
 import './repositories-list.scss';
 
-export class RepositoriesList extends React.Component {
+class RepositoriesList extends React.Component {
     columns = [
                 {
                     label: 'Name',
@@ -46,6 +47,7 @@ export class RepositoriesList extends React.Component {
     }
 
     render() {
+
         const { user, repositories } = this.props;
 
         let items = [];
@@ -84,3 +86,10 @@ export class RepositoriesList extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        repositories: state.repositories
+    };
+};
+
+export default connect(mapStateToProps)(RepositoriesList);
